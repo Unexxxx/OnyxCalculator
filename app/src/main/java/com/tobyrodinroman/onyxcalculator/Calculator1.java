@@ -8,14 +8,22 @@ import android.widget.TextView;
 
 public class Calculator1 extends AppCompatActivity {
 
+    private static boolean startUpMethod = true;
+
     TextView tvInput, tvOutput;
-    float firstNum, total;
+    String firstNum, total;
+    float grandTotal;
     String operator;
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if(startUpMethod){
+                firstNum = "";
+        }
+        startUpMethod = false;
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calculator1);
         getSupportActionBar().hide();
@@ -86,44 +94,57 @@ public class Calculator1 extends AppCompatActivity {
     }
     public void onInputNumbers(int num){
         String currentText = tvInput.getText().toString();
-        String newCurrentText = currentText + num;
-        tvInput.setText(newCurrentText);
+        firstNum = currentText + num;
+        tvInput.setText(firstNum);
 
     }
     public void onInputOperator(String operate){
-        switch (operate){
+        String currentInputDisplay = firstNum;
+        switch (operate) {
             case "add":
-                tvInput.setText("+");
-                if(tvInput.getText() == "+"){
+                tvInput.setText(currentInputDisplay + "+");
+                total = currentInputDisplay;
+                tvOutput.setText(total);
+
+                if (currentInputDisplay == "" && operate == "add") {
                     errorMessage();
                 }
                 break;
             case "diff":
-                tvInput.setText("–");
-                if(tvInput.getText() == "–"){
+                tvInput.setText(currentInputDisplay + "–");
+                total = currentInputDisplay;
+                tvOutput.setText(total);
+
+                if (currentInputDisplay == "" && operate == "diff") {
                     errorMessage();
                 }
                 break;
             case "prod":
-                tvInput.setText("×");
-                if(tvInput.getText() == "×"){
+                tvInput.setText(currentInputDisplay + "×");
+                total = currentInputDisplay;
+                tvOutput.setText(total);
+
+                if (currentInputDisplay == "" && operate == "prod") {
                     errorMessage();
                 }
                 break;
             case "quo":
-                tvInput.setText("÷");
-                if(tvInput.getText() == "÷"){
+                tvInput.setText(currentInputDisplay + "÷");
+                total = currentInputDisplay;
+                tvOutput.setText(total);
+
+                if (currentInputDisplay == "" && operate == "quo") {
                     errorMessage();
                 }
                 break;
             case "percent":
-                tvInput.setText("%");
-                if(tvInput.getText() == "%"){
+                tvInput.setText(currentInputDisplay + "%");
+                if (tvInput.getText() == "%") {
                     errorMessage();
                 }
                 break;
             case "dot":
-                tvInput.setText(".");
+                tvInput.setText(currentInputDisplay + ".");
                 break;
         }
     }
@@ -134,6 +155,7 @@ public class Calculator1 extends AppCompatActivity {
     public void allClear(View view){
         tvInput.setText("");
         tvOutput.setText("");
+        firstNum = "";
     }
     public void clear(View view){
             String display = tvInput.getText().toString();
