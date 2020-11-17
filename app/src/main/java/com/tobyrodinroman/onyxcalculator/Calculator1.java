@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 public class Calculator1 extends AppCompatActivity {
@@ -12,7 +13,7 @@ public class Calculator1 extends AppCompatActivity {
 
     TextView tvInput, tvOutput;
     String firstNum, total;
-    float grandTotal;
+    float semiGrandTotal, grandTotal, percentTotal;
     String operator;
 
 
@@ -102,45 +103,59 @@ public class Calculator1 extends AppCompatActivity {
         String currentInputDisplay = firstNum;
         switch (operate) {
             case "add":
+                operator = "add";
                 tvInput.setText(currentInputDisplay + "+");
-                total = currentInputDisplay;
-                tvOutput.setText(total);
-
                 if (currentInputDisplay == "" && operate == "add") {
                     errorMessage();
+                }
+                else{
+                    tvInput.setText(currentInputDisplay + "+");
+                    total = currentInputDisplay;
+                    tvOutput.setText(total+"");
                 }
                 break;
             case "diff":
                 tvInput.setText(currentInputDisplay + "–");
-                total = currentInputDisplay;
-                tvOutput.setText(total);
-
                 if (currentInputDisplay == "" && operate == "diff") {
                     errorMessage();
+                }
+                else{
+                    tvInput.setText(currentInputDisplay + "–");
+                    total = currentInputDisplay;
+                    tvOutput.setText(total);
                 }
                 break;
             case "prod":
                 tvInput.setText(currentInputDisplay + "×");
-                total = currentInputDisplay;
-                tvOutput.setText(total);
-
                 if (currentInputDisplay == "" && operate == "prod") {
                     errorMessage();
+                }
+                else{
+                    tvInput.setText(currentInputDisplay + "×");
+                    total = currentInputDisplay;
+                    tvOutput.setText(total);
                 }
                 break;
             case "quo":
                 tvInput.setText(currentInputDisplay + "÷");
-                total = currentInputDisplay;
-                tvOutput.setText(total);
-
                 if (currentInputDisplay == "" && operate == "quo") {
                     errorMessage();
+                }
+                else{
+                    tvInput.setText(currentInputDisplay + "÷");
+                    total = currentInputDisplay;
+                    tvOutput.setText(total);
                 }
                 break;
             case "percent":
                 tvInput.setText(currentInputDisplay + "%");
-                if (tvInput.getText() == "%") {
+                if (currentInputDisplay == "" && operate == "percent") {
                     errorMessage();
+
+                }else{
+                    tvInput.setText(currentInputDisplay + "%");
+                    percentTotal = Float.parseFloat(currentInputDisplay)/100;
+                    tvOutput.setText(""+ percentTotal);
                 }
                 break;
             case "dot":
@@ -171,6 +186,7 @@ public class Calculator1 extends AppCompatActivity {
     }
 //    public void userNumberInput() {
 //        userInput = Float.parseFloat(tvInput.getText().toString());
+//        String[] numbers = tvInput.getText().toString().split("[%+-x÷]") ;
 //        String[] operators = tvInput.getText().toString().split("[1234567890]") ;
 //        for (String numbers : inputNumbers) {
 //            tvOutput.setText(tvOutput.getText()+numbers);

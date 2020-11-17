@@ -8,7 +8,7 @@
     >
 
     <TextView
-        android:id="@+id/tv_output"
+        android:id="@+id/tv_input"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1.4"
@@ -20,14 +20,14 @@
         android:gravity="bottom">
     </TextView>
     <TextView
-        android:id="@+id/tv_input"
+        android:id="@+id/tv_output"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1.6"
         android:textAlignment="viewEnd"
         android:maxLines="1"
         android:background="#2B2B2B"
-        android:textColor="#FFD664"
+        android:textColor="#9DA5A7"
         android:textSize="36sp"
         android:gravity="bottom">
     </TextView>
