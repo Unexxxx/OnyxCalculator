@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 public class Calculator1 extends AppCompatActivity {
 
-    private static boolean startUpMethod = true;
+//    private static boolean startUpMethod = true;
 
     TextView tvInput, tvOutput;
     String firstNum, total;
@@ -20,10 +20,10 @@ public class Calculator1 extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        if(startUpMethod){
-                firstNum = "";
-        }
-        startUpMethod = false;
+//        if(startUpMethod){
+//                firstNum = "";
+//        }
+//        startUpMethod = false;
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calculator1);
@@ -87,7 +87,6 @@ public class Calculator1 extends AppCompatActivity {
                 onInputOperator("dot");
                 break;
 
-
             case R.id.btn_equal:
 
                 break;
@@ -97,6 +96,16 @@ public class Calculator1 extends AppCompatActivity {
         String currentText = tvInput.getText().toString();
         firstNum = currentText + num;
         tvInput.setText(firstNum);
+
+//        if(operator != null && total !=null){
+//            switch (operator){
+//                case "add":
+//                        grandTotal =Float.parseFloat(total) + Float.parseFloat(firstNum);
+//                        tvOutput.setText(grandTotal+"");
+//                    break;
+//            }
+//
+//        }
 
     }
     public void onInputOperator(String operate){
@@ -162,6 +171,7 @@ public class Calculator1 extends AppCompatActivity {
                 tvInput.setText(currentInputDisplay + ".");
                 break;
         }
+        firstNum = "";
     }
     public void errorMessage(){
         tvOutput.setText("Error");
@@ -186,7 +196,7 @@ public class Calculator1 extends AppCompatActivity {
     }
 //    public void userNumberInput() {
 //        userInput = Float.parseFloat(tvInput.getText().toString());
-//        String[] numbers = tvInput.getText().toString().split("[%+-x÷]") ;
+//        String[] inputNumbers = tvInput.getText().toString().split("[%+-x÷]") ;
 //        String[] operators = tvInput.getText().toString().split("[1234567890]") ;
 //        for (String numbers : inputNumbers) {
 //            tvOutput.setText(tvOutput.getText()+numbers);
