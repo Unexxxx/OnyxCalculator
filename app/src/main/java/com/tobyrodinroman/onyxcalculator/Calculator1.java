@@ -9,21 +9,23 @@ import android.widget.TextView;
 
 public class Calculator1 extends AppCompatActivity {
 
-//    private static boolean startUpMethod = true;
+    private static boolean startUpMethod = true;
 
     TextView tvInput, tvOutput;
-    String firstNum, total;
-    float semiGrandTotal, grandTotal, percentTotal;
-    String operator;
+    String firstNum, inputNumbers, operator;
+    float semiGrandTotal;
+    float grandTotal;
+    float percentTotal;
+    float total;
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-//        if(startUpMethod){
-//                firstNum = "";
-//        }
-//        startUpMethod = false;
+        if(startUpMethod){
+                firstNum = "";
+        }
+        startUpMethod = false;
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calculator1);
@@ -93,33 +95,31 @@ public class Calculator1 extends AppCompatActivity {
         }
     }
     public void onInputNumbers(int num){
+        if(operator == "add"){
+            semiGrandTotal = grandTotal + Float.parseFloat(firstNum);
+            tvOutput.setText(semiGrandTotal+"");
+        }
+
         String currentText = tvInput.getText().toString();
         firstNum = currentText + num;
         tvInput.setText(firstNum);
 
-//        if(operator != null && total !=null){
-//            switch (operator){
-//                case "add":
-//                        grandTotal =Float.parseFloat(total) + Float.parseFloat(firstNum);
-//                        tvOutput.setText(grandTotal+"");
-//                    break;
-//            }
-//
-//        }
+
 
     }
     public void onInputOperator(String operate){
         String currentInputDisplay = firstNum;
         switch (operate) {
             case "add":
-                operator = "add";
                 tvInput.setText(currentInputDisplay + "+");
                 if (currentInputDisplay == "" && operate == "add") {
                     errorMessage();
                 }
                 else{
+                    operator = "add";
                     tvInput.setText(currentInputDisplay + "+");
-                    total = currentInputDisplay;
+                    inputNumbers = tvInput.getText().toString().replace("+", "");
+                    total = Float.parseFloat(inputNumbers);
                     tvOutput.setText(total+"");
                 }
                 break;
@@ -130,8 +130,8 @@ public class Calculator1 extends AppCompatActivity {
                 }
                 else{
                     tvInput.setText(currentInputDisplay + "–");
-                    total = currentInputDisplay;
-                    tvOutput.setText(total);
+//                    total = currentInputDisplay;
+//                    tvOutput.setText(total);
                 }
                 break;
             case "prod":
@@ -141,8 +141,8 @@ public class Calculator1 extends AppCompatActivity {
                 }
                 else{
                     tvInput.setText(currentInputDisplay + "×");
-                    total = currentInputDisplay;
-                    tvOutput.setText(total);
+//                    total = currentInputDisplay;
+//                    tvOutput.setText(total);
                 }
                 break;
             case "quo":
@@ -152,8 +152,8 @@ public class Calculator1 extends AppCompatActivity {
                 }
                 else{
                     tvInput.setText(currentInputDisplay + "÷");
-                    total = currentInputDisplay;
-                    tvOutput.setText(total);
+//                    total = currentInputDisplay;
+//                    tvOutput.setText(total);
                 }
                 break;
             case "percent":
@@ -172,6 +172,7 @@ public class Calculator1 extends AppCompatActivity {
                 break;
         }
         firstNum = "";
+        operator = null;
     }
     public void errorMessage(){
         tvOutput.setText("Error");
@@ -181,6 +182,7 @@ public class Calculator1 extends AppCompatActivity {
         tvInput.setText("");
         tvOutput.setText("");
         firstNum = "";
+        total = 0;
     }
     public void clear(View view){
             String display = tvInput.getText().toString();
@@ -191,7 +193,6 @@ public class Calculator1 extends AppCompatActivity {
                 display = display.substring(0, display.length() - 1);
                 tvInput.setText(display);
                 tvOutput.setText("");
-
             }
     }
 //    public void userNumberInput() {
