@@ -107,23 +107,24 @@ public class Calculator1 extends AppCompatActivity {
         if(operator == "add"){
             String[] splittedString = secondNum.split("[+]");
             String inputNumbers = splittedString[splittedString.length-1];
-            total = total + Float.parseFloat(inputNumbers);
-            tvOutput.setText(total+"");
+            semiGrandTotal = total + Float.parseFloat(inputNumbers);
+            tvOutput.setText(semiGrandTotal+"");
         }
 
     }
     public void onInputOperator(String operate){
         String currentInputDisplay = firstNum;
+
         switch (operate) {
             case "add":
                 operator = "add";
                 tvInput.setText(currentInputDisplay + "+");
-                if (currentInputDisplay == "" && operate == "add") {
+                if(semiGrandTotal != 0.0){
+                    tvInput.setText(secondNum + "+");
+                    total = semiGrandTotal;
+                }else if (currentInputDisplay == "" && operate == "add") {
                     errorMessage();
-                }
-                else{
-                    tvInput.setText(currentInputDisplay + "+");
-//                    inputNumbers = tvInput.getText().toString().replace("+", "");
+                }else{
                     total = Float.parseFloat(currentInputDisplay);
                     tvOutput.setText(total+"");
                 }
@@ -190,6 +191,7 @@ public class Calculator1 extends AppCompatActivity {
         inputNumbers = "";
         operator = null;
         secondNum = "";
+        semiGrandTotal = 0;
 
     }
     public void clear(View view){
