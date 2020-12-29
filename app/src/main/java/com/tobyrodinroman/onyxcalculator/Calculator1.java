@@ -12,7 +12,7 @@ public class Calculator1 extends AppCompatActivity {
     private static boolean startUpMethod = true;
 
     TextView tvInput, tvOutput;
-    String firstNum, inputNumbers, operator;
+    String firstNum, secondNum, inputNumbers, operator;
     float semiGrandTotal;
     float grandTotal;
     float percentTotal;
@@ -96,12 +96,19 @@ public class Calculator1 extends AppCompatActivity {
     }
     public void onInputNumbers(int num){
         String currentText = tvInput.getText().toString();
-        firstNum = currentText + num;
-        tvInput.setText(firstNum);
+        if(total == 0.0){
+            firstNum = currentText + num;
+            tvInput.setText(firstNum);
+        }else{
+            secondNum = currentText + num;
+            tvInput.setText(secondNum);
+        }
 
         if(operator == "add"){
-            semiGrandTotal = total + num;
-            tvOutput.setText(semiGrandTotal+"");
+            String[] splittedString = secondNum.split("[+]");
+            String inputNumbers = splittedString[splittedString.length-1];
+            total = total + Float.parseFloat(inputNumbers);
+            tvOutput.setText(total+"");
         }
 
     }
@@ -116,8 +123,8 @@ public class Calculator1 extends AppCompatActivity {
                 }
                 else{
                     tvInput.setText(currentInputDisplay + "+");
-                    inputNumbers = tvInput.getText().toString().replace("+", "");
-                    total = Float.parseFloat(inputNumbers);
+//                    inputNumbers = tvInput.getText().toString().replace("+", "");
+                    total = Float.parseFloat(currentInputDisplay);
                     tvOutput.setText(total+"");
                 }
                 break;
@@ -170,7 +177,6 @@ public class Calculator1 extends AppCompatActivity {
                 break;
         }
         firstNum = "";
-        operator = null;
     }
     public void errorMessage(){
         tvOutput.setText("Error");
@@ -181,6 +187,10 @@ public class Calculator1 extends AppCompatActivity {
         tvOutput.setText("");
         firstNum = "";
         total = 0;
+        inputNumbers = "";
+        operator = null;
+        secondNum = "";
+
     }
     public void clear(View view){
             String display = tvInput.getText().toString();
