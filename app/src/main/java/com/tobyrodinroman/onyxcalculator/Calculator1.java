@@ -95,28 +95,26 @@ public class Calculator1 extends AppCompatActivity {
         }
     }
     public void onInputNumbers(int num){
-        if(operator == "add"){
-            semiGrandTotal = grandTotal + Float.parseFloat(firstNum);
-            tvOutput.setText(semiGrandTotal+"");
-        }
-
         String currentText = tvInput.getText().toString();
         firstNum = currentText + num;
         tvInput.setText(firstNum);
 
-
+        if(operator == "add"){
+            semiGrandTotal = total + num;
+            tvOutput.setText(semiGrandTotal+"");
+        }
 
     }
     public void onInputOperator(String operate){
         String currentInputDisplay = firstNum;
         switch (operate) {
             case "add":
+                operator = "add";
                 tvInput.setText(currentInputDisplay + "+");
                 if (currentInputDisplay == "" && operate == "add") {
                     errorMessage();
                 }
                 else{
-                    operator = "add";
                     tvInput.setText(currentInputDisplay + "+");
                     inputNumbers = tvInput.getText().toString().replace("+", "");
                     total = Float.parseFloat(inputNumbers);
