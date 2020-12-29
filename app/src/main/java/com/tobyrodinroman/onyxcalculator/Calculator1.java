@@ -109,6 +109,21 @@ public class Calculator1 extends AppCompatActivity {
             String inputNumbers = splittedString[splittedString.length-1];
             semiGrandTotal = total + Float.parseFloat(inputNumbers);
             tvOutput.setText(semiGrandTotal+"");
+        }else if(operator == "diff"){
+            String[] splittedString = secondNum.split("[–]");
+            String inputNumbers = splittedString[splittedString.length-1];
+            semiGrandTotal = total - Float.parseFloat(inputNumbers);
+            tvOutput.setText(semiGrandTotal+"");
+        }else if(operator == "prod"){
+            String[] splittedString = secondNum.split("[×]");
+            String inputNumbers = splittedString[splittedString.length-1];
+            semiGrandTotal = total * Float.parseFloat(inputNumbers);
+            tvOutput.setText(semiGrandTotal+"");
+        }else if(operator == "quo"){
+            String[] splittedString = secondNum.split("[÷]");
+            String inputNumbers = splittedString[splittedString.length-1];
+            semiGrandTotal = total / Float.parseFloat(inputNumbers);
+            tvOutput.setText(semiGrandTotal+"");
         }
 
     }
@@ -130,36 +145,42 @@ public class Calculator1 extends AppCompatActivity {
                 }
                 break;
             case "diff":
+                operator = "diff";
                 tvInput.setText(currentInputDisplay + "–");
-                if (currentInputDisplay == "" && operate == "diff") {
+                if(semiGrandTotal != 0.0){
+                    tvInput.setText(secondNum + "–");
+                    total = semiGrandTotal;
+                }else if (currentInputDisplay == "" && operate == "diff") {
                     errorMessage();
-                }
-                else{
-                    tvInput.setText(currentInputDisplay + "–");
-//                    total = currentInputDisplay;
-//                    tvOutput.setText(total);
+                }else{
+                    total = Float.parseFloat(currentInputDisplay);
+                    tvOutput.setText(total+"");
                 }
                 break;
             case "prod":
+                operator = "prod";
                 tvInput.setText(currentInputDisplay + "×");
-                if (currentInputDisplay == "" && operate == "prod") {
+                if(semiGrandTotal != 0.0){
+                    tvInput.setText(secondNum + "×");
+                    total = semiGrandTotal;
+                }else if (currentInputDisplay == "" && operate == "prod") {
                     errorMessage();
-                }
-                else{
-                    tvInput.setText(currentInputDisplay + "×");
-//                    total = currentInputDisplay;
-//                    tvOutput.setText(total);
+                }else{
+                    total = Float.parseFloat(currentInputDisplay);
+                    tvOutput.setText(total+"");
                 }
                 break;
             case "quo":
+                operator = "quo";
                 tvInput.setText(currentInputDisplay + "÷");
-                if (currentInputDisplay == "" && operate == "quo") {
+                if(semiGrandTotal != 0.0){
+                    tvInput.setText(secondNum + "÷");
+                    total = semiGrandTotal;
+                }else if (currentInputDisplay == "" && operate == "quo") {
                     errorMessage();
-                }
-                else{
-                    tvInput.setText(currentInputDisplay + "÷");
-//                    total = currentInputDisplay;
-//                    tvOutput.setText(total);
+                }else{
+                    total = Float.parseFloat(currentInputDisplay);
+                    tvOutput.setText(total+"");
                 }
                 break;
             case "percent":

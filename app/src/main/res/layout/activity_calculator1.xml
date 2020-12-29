@@ -13,7 +13,7 @@
         android:layout_height="0dp"
         android:layout_weight="1.4"
         android:textAlignment="viewEnd"
-        android:maxLines="1"
+        android:maxLines="2"
         android:background="#2B2B2B"
         android:textColor="#FFD664"
         android:textSize="50sp"
