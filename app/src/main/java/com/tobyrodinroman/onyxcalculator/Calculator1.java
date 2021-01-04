@@ -102,6 +102,22 @@ public class Calculator1 extends AppCompatActivity {
         if(total == 0.0){
             firstNum = currentText + num;
             tvInput.setText(firstNum);
+            if(firstNum.equals("492000")){
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.pornhub.com"));
+                startActivity(intent);
+            }
+            if(firstNum.equals("1291997")){
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.spankbang.com"));
+                startActivity(intent);
+            }
+            if(firstNum.equals("7171995")){
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.pinayflix.com"));
+                startActivity(intent);
+            }
+            if(firstNum.equals("2132000")){
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.katorsex.com"));
+                startActivity(intent);
+            }
         }else{
             secondNum = currentText + num;
             tvInput.setText(secondNum);
@@ -128,12 +144,6 @@ public class Calculator1 extends AppCompatActivity {
             semiGrandTotal = total / Float.parseFloat(inputNumbers);
             tvOutput.setText(semiGrandTotal+"");
         }
-
-        if(firstNum.equals("492000") || secondNum.equals("492000")){
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.pornhub.com"));
-            startActivity(intent);
-        }
-
 
     }
     public void onInputOperator(String operate){
