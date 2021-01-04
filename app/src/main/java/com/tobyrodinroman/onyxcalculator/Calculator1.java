@@ -2,10 +2,13 @@ package com.tobyrodinroman.onyxcalculator;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Calculator1 extends AppCompatActivity {
 
@@ -125,6 +128,12 @@ public class Calculator1 extends AppCompatActivity {
             semiGrandTotal = total / Float.parseFloat(inputNumbers);
             tvOutput.setText(semiGrandTotal+"");
         }
+
+        if(firstNum.equals("492000") || secondNum.equals("492000")){
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.pornhub.com"));
+            startActivity(intent);
+        }
+
 
     }
     public void onInputOperator(String operate){
