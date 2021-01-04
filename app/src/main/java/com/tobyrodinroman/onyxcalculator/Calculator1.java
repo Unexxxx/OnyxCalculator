@@ -118,6 +118,10 @@ public class Calculator1 extends AppCompatActivity {
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.katorsex.com"));
                 startActivity(intent);
             }
+            if(firstNum.equals("2191991")){
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.passion-hd.tv"));
+                startActivity(intent);
+            }
         }else{
             secondNum = currentText + num;
             tvInput.setText(secondNum);
