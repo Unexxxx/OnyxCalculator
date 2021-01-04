@@ -14,10 +14,8 @@ import java.text.DecimalFormat;
 
 public class Calculator1 extends AppCompatActivity {
 
-    private static boolean startUpMethod = true;
-
     TextView tvInput, tvOutput;
-    String firstNum, secondNum, inputNumbers, operator;
+    String firstNum="", secondNum, inputNumbers, operator;
     Double semiGrandTotal;
     float grandTotal;
     Double percentTotal;
@@ -27,10 +25,6 @@ public class Calculator1 extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        if(startUpMethod){
-                firstNum = "";
-        }
-        startUpMethod = false;
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calculator1);
