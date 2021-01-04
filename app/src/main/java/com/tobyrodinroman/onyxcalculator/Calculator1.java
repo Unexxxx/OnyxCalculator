@@ -222,7 +222,6 @@ public class Calculator1 extends AppCompatActivity {
                 tvInput.setText(currentInputDisplay + "%");
                 if(semiGrandTotal != null){
                     tvInput.setText(secondNum + "%");
-                    total = semiGrandTotal;
                     semiGrandTotal = (total/100) * Double.parseDouble(inputNumbers);
                     tvOutput.setText(format.format(semiGrandTotal));
                 }else if(currentInputDisplay == "" && operate == "percent") {
