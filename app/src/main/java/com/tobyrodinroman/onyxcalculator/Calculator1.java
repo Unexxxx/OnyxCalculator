@@ -10,16 +10,18 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DecimalFormat;
+
 public class Calculator1 extends AppCompatActivity {
 
     private static boolean startUpMethod = true;
 
     TextView tvInput, tvOutput;
     String firstNum, secondNum, inputNumbers, operator;
-    float semiGrandTotal;
+    Double semiGrandTotal;
     float grandTotal;
     float percentTotal;
-    float total;
+    Double total;
 
 
 
@@ -36,6 +38,7 @@ public class Calculator1 extends AppCompatActivity {
 
         tvInput = findViewById(R.id.tv_input);
         tvOutput = findViewById(R.id.tv_output);
+
 
     }
     public void onNumberClick(View view){
@@ -98,8 +101,11 @@ public class Calculator1 extends AppCompatActivity {
         }
     }
     public void onInputNumbers(int num){
+        DecimalFormat format = new DecimalFormat();
+        format.setDecimalSeparatorAlwaysShown(false);
+
         String currentText = tvInput.getText().toString();
-        if(total == 0.0){
+        if(total == null){
             firstNum = currentText + num;
             tvInput.setText(firstNum);
             if(firstNum.equals("492000")){
@@ -126,80 +132,83 @@ public class Calculator1 extends AppCompatActivity {
         if(operator == "add"){
             String[] splittedString = secondNum.split("[+]");
             String inputNumbers = splittedString[splittedString.length-1];
-            semiGrandTotal = total + Float.parseFloat(inputNumbers);
-            tvOutput.setText(semiGrandTotal+"");
+            semiGrandTotal = total + Double.parseDouble(inputNumbers);
+            tvOutput.setText(format.format(semiGrandTotal)+"");
         }else if(operator == "diff"){
             String[] splittedString = secondNum.split("[–]");
             String inputNumbers = splittedString[splittedString.length-1];
-            semiGrandTotal = total - Float.parseFloat(inputNumbers);
-            tvOutput.setText(semiGrandTotal+"");
+            semiGrandTotal = total - Double.parseDouble(inputNumbers);
+            tvOutput.setText(format.format(semiGrandTotal)+"");
         }else if(operator == "prod"){
             String[] splittedString = secondNum.split("[×]");
             String inputNumbers = splittedString[splittedString.length-1];
-            semiGrandTotal = total * Float.parseFloat(inputNumbers);
-            tvOutput.setText(semiGrandTotal+"");
+            semiGrandTotal = total * Double.parseDouble(inputNumbers);
+            tvOutput.setText(format.format(semiGrandTotal)+"");
         }else if(operator == "quo"){
             String[] splittedString = secondNum.split("[÷]");
             String inputNumbers = splittedString[splittedString.length-1];
-            semiGrandTotal = total / Float.parseFloat(inputNumbers);
-            tvOutput.setText(semiGrandTotal+"");
+            semiGrandTotal = total / Double.parseDouble(inputNumbers);
+            tvOutput.setText(format.format(semiGrandTotal)+"");
         }
 
     }
     public void onInputOperator(String operate){
+        DecimalFormat format = new DecimalFormat();
+        format.setDecimalSeparatorAlwaysShown(false);
+
         String currentInputDisplay = firstNum;
 
         switch (operate) {
             case "add":
                 operator = "add";
                 tvInput.setText(currentInputDisplay + "+");
-                if(semiGrandTotal != 0.0){
+                if(semiGrandTotal != null){
                     tvInput.setText(secondNum + "+");
                     total = semiGrandTotal;
                 }else if (currentInputDisplay == "" && operate == "add") {
                     errorMessage();
                 }else{
-                    total = Float.parseFloat(currentInputDisplay);
-                    tvOutput.setText(total+"");
+                    total = Double.parseDouble(currentInputDisplay);
+                    tvOutput.setText(format.format(total)+"");
                 }
                 break;
             case "diff":
                 operator = "diff";
                 tvInput.setText(currentInputDisplay + "–");
-                if(semiGrandTotal != 0.0){
+                if(semiGrandTotal != null){
                     tvInput.setText(secondNum + "–");
                     total = semiGrandTotal;
                 }else if (currentInputDisplay == "" && operate == "diff") {
                     errorMessage();
                 }else{
-                    total = Float.parseFloat(currentInputDisplay);
-                    tvOutput.setText(total+"");
+                    total = Double.parseDouble(currentInputDisplay);
+                    tvOutput.setText(format.format(total)+"");
                 }
                 break;
             case "prod":
                 operator = "prod";
                 tvInput.setText(currentInputDisplay + "×");
-                if(semiGrandTotal != 0.0){
+                if(semiGrandTotal != null){
                     tvInput.setText(secondNum + "×");
                     total = semiGrandTotal;
                 }else if (currentInputDisplay == "" && operate == "prod") {
                     errorMessage();
                 }else{
-                    total = Float.parseFloat(currentInputDisplay);
-                    tvOutput.setText(total+"");
+                    total = Double.parseDouble(currentInputDisplay);
+                    tvOutput.setText(format.format(total)+"");
                 }
                 break;
             case "quo":
                 operator = "quo";
                 tvInput.setText(currentInputDisplay + "÷");
-                if(semiGrandTotal != 0.0){
+                if(semiGrandTotal != null){
                     tvInput.setText(secondNum + "÷");
                     total = semiGrandTotal;
                 }else if (currentInputDisplay == "" && operate == "quo") {
                     errorMessage();
                 }else{
-                    total = Float.parseFloat(currentInputDisplay);
-                    tvOutput.setText(total+"");
+                    total = Double.parseDouble(currentInputDisplay);
+                    tvOutput.setText(format.format(total)+"");
                 }
                 break;
             case "percent":
@@ -210,7 +219,7 @@ public class Calculator1 extends AppCompatActivity {
                 }else{
                     tvInput.setText(currentInputDisplay + "%");
                     percentTotal = Float.parseFloat(currentInputDisplay)/100;
-                    tvOutput.setText(""+ percentTotal);
+                    tvOutput.setText(format.format(percentTotal)+"");
                 }
                 break;
             case "dot":
@@ -227,11 +236,11 @@ public class Calculator1 extends AppCompatActivity {
         tvInput.setText("");
         tvOutput.setText("");
         firstNum = "";
-        total = 0;
+        total = null;
         inputNumbers = "";
         operator = null;
         secondNum = "";
-        semiGrandTotal = 0;
+        semiGrandTotal = null;
 
     }
     public void clear(View view){
