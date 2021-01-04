@@ -20,7 +20,7 @@ public class Calculator1 extends AppCompatActivity {
     String firstNum, secondNum, inputNumbers, operator;
     Double semiGrandTotal;
     float grandTotal;
-    float percentTotal;
+    Double percentTotal;
     Double total;
 
 
@@ -149,6 +149,12 @@ public class Calculator1 extends AppCompatActivity {
             String inputNumbers = splittedString[splittedString.length-1];
             semiGrandTotal = total / Double.parseDouble(inputNumbers);
             tvOutput.setText(format.format(semiGrandTotal)+"");
+        }else if(operator == "percent"){
+            String[] splittedString = secondNum.split("[%]");
+            inputNumbers = splittedString[splittedString.length-1];
+            semiGrandTotal = (total/100) * Double.parseDouble(inputNumbers);
+//            tvOutput.setText(format.format(semiGrandTotal)+"");
+            errorMessage();
         }
 
     }
@@ -212,14 +218,18 @@ public class Calculator1 extends AppCompatActivity {
                 }
                 break;
             case "percent":
+                operator = "percent";
                 tvInput.setText(currentInputDisplay + "%");
-                if (currentInputDisplay == "" && operate == "percent") {
+                if(semiGrandTotal != null){
+                    tvInput.setText(secondNum + "%");
+                    total = semiGrandTotal;
+                    semiGrandTotal = (total/100) * Double.parseDouble(inputNumbers);
+                    tvOutput.setText(format.format(semiGrandTotal));
+                }else if(currentInputDisplay == "" && operate == "percent") {
                     errorMessage();
-
                 }else{
-                    tvInput.setText(currentInputDisplay + "%");
-                    percentTotal = Float.parseFloat(currentInputDisplay)/100;
-                    tvOutput.setText(format.format(percentTotal)+"");
+                    total = Double.parseDouble(currentInputDisplay)/100;
+                    tvOutput.setText(format.format(total));
                 }
                 break;
             case "dot":
@@ -251,7 +261,7 @@ public class Calculator1 extends AppCompatActivity {
             else{
                 display = display.substring(0, display.length() - 1);
                 tvInput.setText(display);
-                tvOutput.setText("");
+                tvOutput.setText(semiGrandTotal+"");
             }
     }
 //    public void userNumberInput() {
