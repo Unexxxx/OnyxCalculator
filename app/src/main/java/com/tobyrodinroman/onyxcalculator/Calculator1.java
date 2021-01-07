@@ -14,11 +14,10 @@ import java.text.DecimalFormat;
 
 public class Calculator1 extends AppCompatActivity {
 
+
     TextView tvInput, tvOutput;
     String firstNum="", secondNum, inputNumbers, operator;
     Double semiGrandTotal;
-    float grandTotal;
-    Double percentTotal;
     Double total;
 
 
@@ -92,6 +91,10 @@ public class Calculator1 extends AppCompatActivity {
             case R.id.btn_equal:
 
                 break;
+
+            case R.id.btn_clear:
+                onInputOperator("clear");
+                break;
         }
     }
     public void onInputNumbers(int num){
@@ -151,7 +154,6 @@ public class Calculator1 extends AppCompatActivity {
             String[] splittedString = secondNum.split("[%]");
             inputNumbers = splittedString[splittedString.length-1];
             semiGrandTotal = (total/100) * Double.parseDouble(inputNumbers);
-//            tvOutput.setText(format.format(semiGrandTotal)+"");
             errorMessage();
         }
 
@@ -165,72 +167,112 @@ public class Calculator1 extends AppCompatActivity {
         switch (operate) {
             case "add":
                 operator = "add";
-                tvInput.setText(currentInputDisplay + "+");
                 if(semiGrandTotal != null){
                     tvInput.setText(secondNum + "+");
                     total = semiGrandTotal;
-                }else if (currentInputDisplay == "" && operate == "add") {
+                }else if(tvInput.getText() == "") {
+                    tvInput.setText(currentInputDisplay + "+");
                     errorMessage();
+                }else if(tvInput.getText() != "" && currentInputDisplay == ""){
+                    currentInputDisplay = tvInput.getText().toString();
+                    currentInputDisplay = currentInputDisplay.substring(0, currentInputDisplay.length() - 1);
+                    tvInput.setText(currentInputDisplay + "+");
                 }else{
+                    tvInput.setText(currentInputDisplay + "+");
                     total = Double.parseDouble(currentInputDisplay);
                     tvOutput.setText(format.format(total)+"");
                 }
                 break;
             case "diff":
                 operator = "diff";
-                tvInput.setText(currentInputDisplay + "–");
                 if(semiGrandTotal != null){
                     tvInput.setText(secondNum + "–");
                     total = semiGrandTotal;
-                }else if (currentInputDisplay == "" && operate == "diff") {
+                }else if (tvInput.getText() == "") {
+                    tvInput.setText(currentInputDisplay + "–");
                     errorMessage();
+                }else if(tvInput.getText() != "" && currentInputDisplay == ""){
+                    currentInputDisplay = tvInput.getText().toString();
+                    currentInputDisplay = currentInputDisplay.substring(0, currentInputDisplay.length() - 1);
+                    tvInput.setText(currentInputDisplay + "–");
                 }else{
+                    tvInput.setText(currentInputDisplay + "–");
                     total = Double.parseDouble(currentInputDisplay);
                     tvOutput.setText(format.format(total)+"");
                 }
                 break;
             case "prod":
                 operator = "prod";
-                tvInput.setText(currentInputDisplay + "×");
                 if(semiGrandTotal != null){
                     tvInput.setText(secondNum + "×");
                     total = semiGrandTotal;
-                }else if (currentInputDisplay == "" && operate == "prod") {
+                }else if (tvInput.getText() == "") {
+                    tvInput.setText(currentInputDisplay + "×");
                     errorMessage();
+                }else if(tvInput.getText() != "" && currentInputDisplay == ""){
+                    currentInputDisplay = tvInput.getText().toString();
+                    currentInputDisplay = currentInputDisplay.substring(0, currentInputDisplay.length() - 1);
+                    tvInput.setText(currentInputDisplay + "×");
                 }else{
+                    tvInput.setText(currentInputDisplay + "×");
                     total = Double.parseDouble(currentInputDisplay);
                     tvOutput.setText(format.format(total)+"");
                 }
                 break;
             case "quo":
                 operator = "quo";
-                tvInput.setText(currentInputDisplay + "÷");
                 if(semiGrandTotal != null){
                     tvInput.setText(secondNum + "÷");
                     total = semiGrandTotal;
-                }else if (currentInputDisplay == "" && operate == "quo") {
+                }else if (tvInput.getText() == "") {
+                    tvInput.setText(currentInputDisplay + "÷");
                     errorMessage();
+                }else if(tvInput.getText() != "" && currentInputDisplay == ""){
+                    currentInputDisplay = tvInput.getText().toString();
+                    currentInputDisplay = currentInputDisplay.substring(0, currentInputDisplay.length() - 1);
+                    tvInput.setText(currentInputDisplay + "÷");
                 }else{
+                    tvInput.setText(currentInputDisplay + "÷");
                     total = Double.parseDouble(currentInputDisplay);
                     tvOutput.setText(format.format(total)+"");
                 }
                 break;
             case "percent":
                 operator = "percent";
-                tvInput.setText(currentInputDisplay + "%");
                 if(semiGrandTotal != null){
                     tvInput.setText(secondNum + "%");
                     semiGrandTotal = (total/100) * Double.parseDouble(inputNumbers);
                     tvOutput.setText(format.format(semiGrandTotal));
-                }else if(currentInputDisplay == "" && operate == "percent") {
+                }else if(tvInput.getText() == "") {
+                    tvInput.setText(currentInputDisplay + "%");
                     errorMessage();
                 }else{
+                    tvInput.setText(currentInputDisplay + "%");
                     total = Double.parseDouble(currentInputDisplay)/100;
                     tvOutput.setText(format.format(total));
                 }
                 break;
             case "dot":
                 tvInput.setText(currentInputDisplay + ".");
+                break;
+            case "clear":
+                operator = "clear";
+                currentInputDisplay = tvInput.getText().toString();
+                if(currentInputDisplay.equals("")) {
+                    tvInput.setText("");
+                    tvOutput.setText("");
+                    firstNum = "";
+                    total = null;
+                    inputNumbers = "";
+                    operator = null;
+                    secondNum = "";
+                    semiGrandTotal = null;
+                }else{
+                    currentInputDisplay = currentInputDisplay.substring(0, currentInputDisplay.length() - 1);
+                    tvInput.setText(currentInputDisplay);
+                    tvOutput.setText("");
+            }
+
                 break;
         }
         firstNum = "";
@@ -250,17 +292,25 @@ public class Calculator1 extends AppCompatActivity {
         semiGrandTotal = null;
 
     }
-    public void clear(View view){
-            String display = tvInput.getText().toString();
-            if(display.equals("")) {
-                tvInput.setText("");
-            }
-            else{
-                display = display.substring(0, display.length() - 1);
-                tvInput.setText(display);
-                tvOutput.setText(semiGrandTotal+"");
-            }
-    }
+//    public void clear(View view){
+
+//            String display = tvInput.getText().toString();
+//            if(display.equals("")) {
+//                tvInput.setText("");
+//                tvOutput.setText("");
+//            }
+//            else{
+//                display = display.substring(0, display.length() - 1);
+//                String[] splittedString = secondNum.split("[%+-x÷]");
+//                tvInput.setText(display);
+//                if(semiGrandTotal == null){
+//                    tvOutput.setText("");
+//                }else{
+//                    tvOutput.setText(format.format(semiGrandTotal));
+//                }
+//
+//            }
+//    }
 //    public void userNumberInput() {
 //        userInput = Float.parseFloat(tvInput.getText().toString());
 //        String[] inputNumbers = tvInput.getText().toString().split("[%+-x÷]") ;
