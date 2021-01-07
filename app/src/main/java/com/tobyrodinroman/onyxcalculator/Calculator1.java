@@ -87,11 +87,6 @@ public class Calculator1 extends AppCompatActivity {
             case R.id.btn_dot:
                 onInputOperator("dot");
                 break;
-
-            case R.id.btn_equal:
-
-                break;
-
             case R.id.btn_clear:
                 onInputOperator("clear");
                 break;
@@ -348,6 +343,27 @@ public class Calculator1 extends AppCompatActivity {
         tvOutput.setText("");
         firstNum = "";
         total = null;
+        inputNumbers = "";
+        operator = null;
+        secondNum = "";
+        semiGrandTotal = null;
+
+    }
+    public void equalS(View view){
+        DecimalFormat format = new DecimalFormat();
+        format.setDecimalSeparatorAlwaysShown(false);
+
+        if(semiGrandTotal == null && total != null){
+            tvInput.setText(format.format(total)+"");
+            firstNum = tvInput.getText().toString();
+        }else if(total != null && semiGrandTotal != null){
+            tvInput.setText(format.format(semiGrandTotal)+"");
+            firstNum = tvInput.getText().toString();
+        }else if(semiGrandTotal == null && total == null){
+            tvInput.setText(tvInput.getText());
+            firstNum = tvInput.getText().toString();
+        }
+        tvOutput.setText("");
         inputNumbers = "";
         operator = null;
         secondNum = "";

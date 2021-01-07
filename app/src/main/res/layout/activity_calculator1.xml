@@ -277,7 +277,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#FFD664"
-                    android:onClick="onNumberClick"
+                    android:onClick="equalS"
                     android:textColor="#1A2B2F"
                     android:textSize="36dp"
                     android:text="=" />
